@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState,useEffect} from "react";
+import Person from "./person";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+  const [ show , setShow] = useState()
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(seconds => seconds +1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+  
+  return( 
+    <>
+    
+      {
+         show ? <Person /> : null
+      }
+      
+    <button onClick={() => {setShow(true) }}  style={{borderRadius:30,textAlign:"center"}}> <h1 >Afficher</h1>  </button>
+    <button onClick={() => {setShow(false) }}  style={{borderRadius:30,textAlign:"center"}}> <h1 >Masquer</h1> </button>
+    {seconds}
+
+
+ 
+      
+    </>
+    
+  )
+  
+};
 
 export default App;
